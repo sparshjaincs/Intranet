@@ -1,0 +1,51 @@
+{% extends "mainapp/submenu_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Offer
+{% endblock %}
+
+{% block content %}
+
+<div class="main">
+<div class="form1">
+
+  <form method="POST" action="#">
+    {% csrf_token %}
+
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">
+          Send Offer
+        </legend>
+        {{ form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">
+          Send Offer
+        </button>
+      </div>
+    </form>
+    {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{% if success_message %}
+<div style="margin-left:300px;">
+  {{success_message}}
+</div>
+{% endif %}
+
+{% endblock %}

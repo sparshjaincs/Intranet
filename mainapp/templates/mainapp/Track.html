@@ -1,0 +1,30 @@
+{% extends "mainapp/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+Track
+{% endblock %}
+{% block jscss %}
+<link href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css" rel="stylesheet">
+<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+{% endblock jscss %}
+
+{% block content %}
+<form method="POST" action="#">
+{% csrf_token %}
+<center>
+  <input type="text" placeholder="Enter your API key" name="API" required>
+
+  <input type="submit" value="Submit">
+</center>
+</form>
+{% if messages %}
+<ul class="messages">
+   {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% if html %}
+  {{html|safe}}
+{% endif %}
+{% endblock %}
